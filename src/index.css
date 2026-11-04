@@ -1,0 +1,295 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #080808;
+    --bg-secondary: #0D0D0D;
+    --text-primary: #F5F5F5;
+    --text-secondary: #B0B0B7;
+    --text-muted: #85858E;
+    --glass: rgba(255, 255, 255, 0.04);
+    --glass-hover: rgba(255, 255, 255, 0.065);
+    --glass-border: rgba(255, 255, 255, 0.11);
+    --glass-border-hover: rgba(255, 255, 255, 0.20);
+    --focus-ring: #E4E4E7;
+  }
+
+  html {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+  }
+
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 10000;
+    transform: translateY(-200%);
+    border-radius: 0.375rem;
+    background: #F5F5F5;
+    color: #080808;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  a:hover,
+  button:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Custom minimal charcoal scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #080808;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #27272A;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3F3F46;
+  }
+
+  /* Header scroll offset for all section targets ensuring headings are never hidden */
+  section[id] {
+    scroll-margin-top: 100px;
+  }
+}
+
+/* Glassmorphism styling with depth and fallback */
+.glass-panel {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 12px 36px rgba(0, 0, 0, 0.16);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-panel:hover {
+  background: var(--glass-hover);
+  border-color: var(--glass-border-hover);
+}
+
+.glass-panel-strong {
+  background: rgba(255, 255, 255, 0.065);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 16px 48px rgba(0, 0, 0, 0.24);
+}
+
+@supports not (backdrop-filter: blur(16px)) {
+  .glass-panel {
+    background: #121212;
+  }
+  .glass-panel-strong {
+    background: #161616;
+  }
+}
+
+/* Typography styles */
+.hero-title {
+  font-size: clamp(2.75rem, 5.2vw, 5.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  font-weight: 650;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 1.7vw, 1.65rem);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.hero-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.topography-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 76% 76%, rgba(255, 255, 255, 0.055), transparent 54%),
+    #080808;
+}
+
+.topography-background::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  opacity: 0.48;
+  background:
+    repeating-radial-gradient(ellipse 50% 34% at 82% 87%, transparent 0 25px, rgba(220, 220, 220, 0.17) 26px 27px, transparent 28px 50px),
+    repeating-radial-gradient(ellipse 62% 48% at 30% 116%, transparent 0 32px, rgba(210, 210, 210, 0.09) 33px 34px, transparent 35px 62px),
+    linear-gradient(180deg, #080808 0%, transparent 42%, rgba(8, 8, 8, 0.3) 100%),
+    linear-gradient(90deg, rgba(8, 8, 8, 0.48), rgba(8, 8, 8, 0.18) 48%, transparent 82%);
+  mask-image: linear-gradient(180deg, transparent 4%, #000 58%, #000 100%);
+}
+
+.topography-background::after {
+  position: absolute;
+  inset: 34% -16% -35%;
+  content: "";
+  opacity: 0.58;
+  background-image:
+    linear-gradient(to top, rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0.28) 55%, transparent),
+    linear-gradient(to top, rgba(225, 225, 225, 0.42), rgba(225, 225, 225, 0.2) 48%, transparent),
+    linear-gradient(to top, rgba(225, 225, 225, 0.38), rgba(225, 225, 225, 0.2) 60%, transparent),
+    linear-gradient(rgba(210, 210, 210, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(210, 210, 210, 0.11) 1px, transparent 1px),
+    radial-gradient(circle, rgba(220, 220, 220, 0.3) 1px, transparent 1.7px);
+  background-size: 1px 72px, 1px 58px, 1px 84px, 54px 42px, 54px 42px, 54px 42px;
+  background-position: 70% 73%, 84% 88%, 95% 77%, center bottom, center bottom, center bottom;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat, repeat;
+  transform: perspective(600px) rotateX(34deg) scale(1.2);
+  transform-origin: 50% 100%;
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 90%, transparent);
+}
+
+.topography-background[data-fallback="true"]::before {
+  opacity: 1;
+}
+
+.topography-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, transparent 4%, #000 48%, #000 100%);
+}
+
+@media (max-width: 640px) {
+  .topography-background {
+    background:
+      radial-gradient(ellipse at 72% 78%, rgba(255, 255, 255, 0.04), transparent 58%),
+      #080808;
+  }
+
+  .topography-background::before {
+    background:
+      repeating-radial-gradient(ellipse 62% 38% at 82% 90%, transparent 0 22px, rgba(220, 220, 220, 0.15) 23px 24px, transparent 25px 44px),
+      repeating-radial-gradient(ellipse 68% 52% at 26% 118%, transparent 0 28px, rgba(210, 210, 210, 0.08) 29px 30px, transparent 31px 53px),
+      linear-gradient(180deg, #080808 0%, transparent 42%, rgba(8, 8, 8, 0.3) 100%),
+      linear-gradient(90deg, rgba(8, 8, 8, 0.38), rgba(8, 8, 8, 0.12) 48%, transparent 82%);
+  }
+
+  .topography-background::after {
+    inset: 25% -38% -24%;
+    background-size: 1px 55px, 1px 48px, 1px 64px, 38px 34px, 38px 34px, 38px 34px;
+    background-position: 69% 76%, 84% 87%, 96% 75%, center bottom, center bottom, center bottom;
+    transform: perspective(500px) rotateX(34deg) scale(1.25);
+  }
+}
+
+.font-sans {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+html,
+body,
+button,
+input,
+textarea {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Accessibility focus ring */
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.legal-content {
+  color: #D4D4D8;
+  font-size: 0.975rem;
+  line-height: 1.8;
+}
+
+.legal-content > p {
+  margin-top: 1.25rem;
+}
+
+.legal-content h2 {
+  margin-top: 2rem;
+  color: #F5F5F5;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.legal-content a,
+.legal-shell footer a,
+.legal-shell nav a {
+  color: #D4D4D8;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.legal-content a:hover,
+.legal-shell footer a:hover,
+.legal-shell nav a:hover {
+  color: #FFFFFF;
+}
+
+.legal-shell nav a[aria-current="page"] {
+  color: #FFFFFF;
+  text-decoration-thickness: 2px;
+}
+
+.legal-content .legal-note {
+  margin-top: 2rem;
+  border-left: 2px solid #85858E;
+  padding-left: 1rem;
+  color: #A1A1AA;
+  font-size: 0.875rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
